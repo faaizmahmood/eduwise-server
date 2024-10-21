@@ -23,7 +23,16 @@ router.post('/signin', async (req, res) => {
         const isMatch = await userData.comparePassword(password);
 
         if (isMatch) {
-            res.status(200).json(userData);
+
+            const userObj = userData.toObject()
+
+            const { password, ...userWithoutPassword } = userObj;
+
+            console.log(userWithoutPassword)
+
+            res.status(200).json({
+                ...userWithoutPassword
+            });
         } else {
             res.status(401).json({
                 error: "Password is incorrect."

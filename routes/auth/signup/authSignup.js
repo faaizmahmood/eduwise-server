@@ -13,7 +13,7 @@ let otpCode = ''
 router.post('/signup', async (req, res) => {
 
     try {
-        const { email, fName, lName, password, privacyPolicy, username } = req.body
+        const { email, fName, lName, password, privacyPolicy, username, isEmailVerified, role } = req.body
 
         const user = await User.findOne({ email: email })
 
@@ -30,7 +30,9 @@ router.post('/signup', async (req, res) => {
                 lName,
                 password,
                 privacyPolicy,
-                username
+                username,
+                role,
+                isEmailVerified
             })
 
             await newUser.save()
