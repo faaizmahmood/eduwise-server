@@ -20,6 +20,9 @@ const authSigninRouter = require('./routes/auth/siginin/authSigin')
 const authSignupRourter = require('./routes/auth/signup/authSignup')
 const authUsernameRouter = require('./routes/auth/username/username')
 const authNewReqRouter = require('./routes/auth/newOtp/newOtp')
+const getCoursesRouter = require('./routes/courses/getCourses/getCourses')
+const getSingleCoursesRouter = require('./routes/courses/singleCourse/singleCourse')
+const quizRouter = require('./routes/quiz/quiz')
 
 
 // Middlware
@@ -41,6 +44,9 @@ app.use('/api/auth', authSigninRouter)
 app.use('/api/auth', authSignupRourter)
 app.use('/api/auth', authUsernameRouter)
 app.use('/api/auth', authNewReqRouter)
+app.use('/api/courses', getCoursesRouter)
+app.use('/api/courses', getSingleCoursesRouter)
+app.use('/api/quiz', quizRouter)
 
 
 app.listen(5000, ()=>{
