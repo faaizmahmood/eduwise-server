@@ -25,32 +25,40 @@ const authSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true, 
+        unique: true,
         trim: true,
     },
     privacyPolicy: {
         type: Boolean,
         required: true,
     },
+    isEmailVerified: {
+        type: Boolean,
+        required: true,
+    },
+    role: {
+        type: String,
+        required: true,
+    },
 },
-{ timestamps: true }
+    { timestamps: true }
 )
 
-authSchema.pre('save', async function (next){
+authSchema.pre('save', async function (next) {
 
     const user = this;
 
-    if(!user.isModified('password')) return  next()
+    if (!user.isModified('password')) return next()
 
     try {
 
         const salt = await bycrypt.genSalt(10)
-        
+
         const hashedPassword = await bycrypt.hash(user.password, salt)
 
         user.password = hashedPassword
 
-       
+
     } catch (error) {
         next(error)
     }

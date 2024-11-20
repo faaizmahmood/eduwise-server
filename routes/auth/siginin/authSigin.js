@@ -11,9 +11,9 @@ router.post('/signin', async (req, res) => {
 
         console.log(email)
 
-        const userData = await User.findOne({email: email})
+        const userData = await User.findOne({ email: email })
 
-        if(!userData){
+        if (!userData) {
             res.status(404).json({
                 error: "user not found."
             })
@@ -23,7 +23,16 @@ router.post('/signin', async (req, res) => {
         const isMatch = await userData.comparePassword(password);
 
         if (isMatch) {
-            res.status(200).json(userData);
+
+            const userObj = userData.toObject()
+
+            const { password, ...userWithoutPassword } = userObj;
+
+            console.log(userWithoutPassword)
+
+            res.status(200).json({
+                ...userWithoutPassword
+            });
         } else {
             res.status(401).json({
                 error: "Password is incorrect."
