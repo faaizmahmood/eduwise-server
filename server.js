@@ -48,7 +48,9 @@ app.use('/api/courses', getCoursesRouter)
 app.use('/api/courses', getSingleCoursesRouter)
 app.use('/api/quiz', quizRouter)
 
+const PORT = process.env.PORT || 5000;
 
-app.listen(5000, ()=>{
+
+app.listen(PORT, ()=>{
     console.log("listening on port 5000")
 })
