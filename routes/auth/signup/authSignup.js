@@ -41,7 +41,7 @@ router.post('/signup', async (req, res) => {
 
                 otpCode = generateOTP();
 
-                otp('faizmahmood018@gmail.com', fName, otpCode)
+                otp(email, fName, otpCode)
                 console.log('Email sent!');
             } catch (error) {
                 console.error('Error sending email:', error);
