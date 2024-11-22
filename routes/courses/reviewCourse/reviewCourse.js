@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Course = require('../../../models/courses');
+const User = require('../../../models/auth');
 
 router.put('/review-course/:courseID', async (req, res) => {
     const { courseID } = req.params;
@@ -37,10 +38,35 @@ router.put('/review-course/:courseID', async (req, res) => {
         course.ratings.average_rating = totalRatingSum / totalReviews;
         course.ratings.total_reviews = totalReviews;
 
-        // Save the updated course
-        await course.save();
+        // Now, save the updated course
+        await course.save(); // Make sure this is called after updating course data
 
-        return res.status(200).json({ message: 'Review added successfully.', ratings: course.ratings });
+        // Update user's completedCourses and currentCourses
+        const user = await User.findById(student_id);
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found.' });
+        }
+
+        // Add courseID to completedCourses if not already present
+        if (!user.completed_courses.some(course => course.course_id.toString() === courseID)) {
+            user.completed_courses.push({
+                course_id: courseID,
+                title: course.title,
+                completion_date: new Date().toISOString()
+            });
+        }
+
+        // Remove courseID from currentCourses if present
+        user.current_courses = user.current_courses.filter((id) => id.toString() !== courseID);
+
+        // Save the updated user
+        await user.save();  // Save the updated user after modification
+
+        // Return the response with updated data
+        const userDetails = await User.findById(student_id);
+        return res.status(200).json({ message: 'Review added successfully.', ratings: course.ratings, userDetails: userDetails });
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'An error occurred while adding the review.' });

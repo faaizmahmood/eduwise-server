@@ -44,7 +44,7 @@ const authSchema = new mongoose.Schema(
     interests: [{ type: String }], // New field for user interests
     current_courses: [
       {
-        course_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
+        course_id: { type: String, ref: 'Course' },
         progress_percentage: { type: Number, default: 0 },
         last_accessed_lesson: {
           module_number: { type: Number },
@@ -55,12 +55,12 @@ const authSchema = new mongoose.Schema(
     ],
     completed_courses: [
       {
-        course_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
+        course_id: { type: String, ref: 'Course' },
+        title: { type: String },
         completion_date: { type: Date },
-        certificate_url: { type: String },
       },
     ],
-    wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+    wishlist: [{ type: String, ref: 'Course' }],
     enrollment_status: { type: String, default: 'active' },
     profile_image: { type: String },
     country: { type: String },
