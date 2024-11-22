@@ -8,6 +8,8 @@ router.post('/update-user', async (req, res) => {
 
     const { user_id, action, data } = req.body;
 
+    console.log(user_id, action, data)
+
     if (!user_id || !action || !data) {
         return res.status(400).send({ error: "Missing required fields." }); // 400 for missing fields
     }

@@ -38,8 +38,8 @@ router.put('/review-course/:courseID', async (req, res) => {
         course.ratings.average_rating = totalRatingSum / totalReviews;
         course.ratings.total_reviews = totalReviews;
 
-        // Now, save the updated course
-        await course.save(); // Make sure this is called after updating course data
+        // Save the updated course
+        await course.save();
 
         // Update user's completedCourses and currentCourses
         const user = await User.findById(student_id);
@@ -49,7 +49,7 @@ router.put('/review-course/:courseID', async (req, res) => {
         }
 
         // Add courseID to completedCourses if not already present
-        if (!user.completed_courses.some(course => course.course_id.toString() === courseID)) {
+        if (!user.completed_courses.some(course => course.course_id.toString() === courseID.toString())) {
             user.completed_courses.push({
                 course_id: courseID,
                 title: course.title,
@@ -58,10 +58,10 @@ router.put('/review-course/:courseID', async (req, res) => {
         }
 
         // Remove courseID from currentCourses if present
-        user.current_courses = user.current_courses.filter((id) => id.toString() !== courseID);
+        user.current_courses = user.current_courses.filter((course) => course.course_id.toString() !== courseID.toString());
 
         // Save the updated user
-        await user.save();  // Save the updated user after modification
+        await user.save();
 
         // Return the response with updated data
         const userDetails = await User.findById(student_id);
