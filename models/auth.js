@@ -42,17 +42,15 @@ const authSchema = new mongoose.Schema(
       default: 'student',
     },
     interests: [{ type: String }], // New field for user interests
+
     current_courses: [
       {
         course_id: { type: String, ref: 'Course' },
         progress_percentage: { type: Number, default: 0 },
-        last_accessed_lesson: {
-          module_number: { type: Number },
-          lesson_number: { type: Number },
-        },
         enrollment_date: { type: Date },
       },
     ],
+
     completed_courses: [
       {
         course_id: { type: String, ref: 'Course' },

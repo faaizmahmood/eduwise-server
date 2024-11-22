@@ -24,6 +24,7 @@ const getCoursesRouter = require('./routes/courses/getCourses/getCourses')
 const getSingleCoursesRouter = require('./routes/courses/singleCourse/singleCourse')
 const ReviewRouter = require('./routes/courses/reviewCourse/reviewCourse')
 const quizRouter = require('./routes/quiz/quiz')
+const userUpdateRouter = require('./routes/user/user')
 
 
 // Middlware
@@ -49,6 +50,7 @@ app.use('/api/courses', getCoursesRouter)
 app.use('/api/courses', getSingleCoursesRouter)
 app.use('/api/courses', ReviewRouter)
 app.use('/api/quiz', quizRouter)
+app.use('/api/user', userUpdateRouter)
 
 const PORT = process.env.PORT || 5000;
 
