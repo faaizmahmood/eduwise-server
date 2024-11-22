@@ -22,6 +22,7 @@ const authUsernameRouter = require('./routes/auth/username/username')
 const authNewReqRouter = require('./routes/auth/newOtp/newOtp')
 const getCoursesRouter = require('./routes/courses/getCourses/getCourses')
 const getSingleCoursesRouter = require('./routes/courses/singleCourse/singleCourse')
+const ReviewRouter = require('./routes/courses/reviewCourse/reviewCourse')
 const quizRouter = require('./routes/quiz/quiz')
 
 
@@ -46,11 +47,16 @@ app.use('/api/auth', authUsernameRouter)
 app.use('/api/auth', authNewReqRouter)
 app.use('/api/courses', getCoursesRouter)
 app.use('/api/courses', getSingleCoursesRouter)
+app.use('/api/courses', ReviewRouter)
 app.use('/api/quiz', quizRouter)
 
 const PORT = process.env.PORT || 5000;
 
-
 app.listen(PORT, ()=>{
     console.log("listening on port 5000")
 })
+
+
+// app.listen(5000, ()=>{
+//     console.log("listening on port 5000")
+// })
