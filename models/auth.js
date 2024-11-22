@@ -48,6 +48,7 @@ const authSchema = new mongoose.Schema(
         course_id: { type: String, ref: 'Course' },
         progress_percentage: { type: Number, default: 0 },
         enrollment_date: { type: Date },
+        title: { type: String }
       },
     ],
 
