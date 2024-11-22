@@ -15,7 +15,7 @@ router.post('/req-otp', async (req, res) => {
 
         const otpCode = generateOTP();
 
-        await otp('faizzafar44@gmail.com', firstName, otpCode)
+        await otp(email, firstName, otpCode)
         console.log("Email Sent!")
 
         res.status(200).send({

@@ -9,10 +9,10 @@ app.use(bodyParser.json())
 app.use(passport.initialize())
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://www.eduwiseapp.tech'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
-}))
+}));
 
 
 // routes
