@@ -94,13 +94,13 @@ router.post('/update-user', async (req, res) => {
 
                 if (user.wishlist.some((ele) => ele.course_id == data.course_id)) {
 
-                    user.wishlist = user.wishlist.filter((course) => course.course_id!== data.course_id)
+                    user.wishlist = user.wishlist.filter((course) => course.course_id !== data.course_id)
 
-                    const updatedUserForUnSavedCourses = await user.save();
+                    const updatedUserForSavedCourses = await user.save();
 
                     return res.status(200).send({
                         message: "User information updated successfully.",
-                        updatedUser: updatedUserForUnSavedCourses
+                        updatedUser: updatedUserForSavedCourses
                     });
                 }
 
@@ -110,6 +110,32 @@ router.post('/update-user', async (req, res) => {
             } catch (error) {
                 console.log("erroe", error)
                 return res.status(500).json({ error: 'An error occurred while Saving Course!' });
+            }
+
+
+        case "update_preference":
+
+            try {
+
+
+                if (data?.preference.length > 5) {
+                    return res.status(400).send({
+                        message: "Should Be Less Than 5",
+                    });
+                }
+
+                user.interests = data?.preference
+
+                const updatedUserForSavedCourses = await user.save();
+
+                return res.status(200).send({
+                    message: "User information updated successfully.",
+                    updatedUser: updatedUserForSavedCourses
+                });
+
+            } catch (error) {
+                console.log("erroe", error)
+                return res.status(500).json({ error: 'An error occurred while Updating Details!' });
             }
 
 
