@@ -59,7 +59,13 @@ const authSchema = new mongoose.Schema(
         completion_date: { type: Date },
       },
     ],
-    wishlist: [{ type: String, ref: 'Course' }],
+    wishlist: [{
+      course_id: { type: String, ref: 'Course' },
+      course_thumbmail: { type: String },
+      course_title: { type: String },
+      avg_rating: { type: Number },
+      instuctor: { type: String }
+    }],
     enrollment_status: { type: String, default: 'active' },
     profile_image: { type: String },
     country: { type: String },
