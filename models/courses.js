@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 // Define the Instructor schema
+// Define the Instructor schema
 const instructorSchema = new mongoose.Schema({
   id: { type: String, ref: 'Instructor' }, // Reference to the instructor collection
   name: { type: String, required: true },

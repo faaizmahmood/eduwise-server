@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Course = require('../../../models/courses');
 const User = require('../../../models/auth');
+const Certificate = require('../../../models/certificate');
 
 router.put('/review-course/:courseID', async (req, res) => {
     const { courseID } = req.params;
@@ -15,6 +16,7 @@ router.put('/review-course/:courseID', async (req, res) => {
     try {
         // Find the course
         const course = await Course.findById(courseID);
+
 
         if (!course) {
             return res.status(404).json({ error: 'Course not found.' });
@@ -41,6 +43,7 @@ router.put('/review-course/:courseID', async (req, res) => {
         // Save the updated course
         await course.save();
 
+
         // Update user's completedCourses and currentCourses
         const user = await User.findById(student_id);
 
@@ -62,6 +65,39 @@ router.put('/review-course/:courseID', async (req, res) => {
 
         // Save the updated user
         await user.save();
+
+
+        const newCertificate = new Certificate({
+            title: course.title,
+            description: course.description,
+            issueDate: new Date().toISOString(),
+
+            student: {
+                student_id: user._id,
+                student_name: `${user.fName} ${user.lName}`,
+                student_email: user.email,
+            },
+
+            course: {
+                course_id: course._id,
+                course_title: course.title,
+                course_description: course.description,
+                language: course.language,
+                level: course.level,
+                duration: course.duration,
+
+                tags: course.tags,
+
+                instructor: {
+                    instructor_id: course.instructor.id,
+                    instructor_name: course.instructor.name,
+                    instructor_pp: course.instructor.profile_image,
+                    instructor_bio: course.instructor.bio,
+                }
+            }
+        })
+
+        await newCertificate.save();
 
         // Return the response with updated data
         const userDetails = await User.findById(student_id);
