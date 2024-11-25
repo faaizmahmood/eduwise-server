@@ -26,18 +26,19 @@ const ReviewRouter = require('./routes/courses/reviewCourse/reviewCourse')
 const quizRouter = require('./routes/quiz/quiz')
 const userUpdateRouter = require('./routes/user/user')
 const allCertificateRouter = require('./routes/certificate/certificate')
+const singleCertificateRouter = require('./routes/certificate/singleCertificate')
 
 
 // Middlware
 
-const logRequest=(req, res, next)=>{
-   console.log(`${new Date().toLocaleString()} Request made to: ${req.originalUrl}`);
-   next()
+const logRequest = (req, res, next) => {
+    console.log(`${new Date().toLocaleString()} Request made to: ${req.originalUrl}`);
+    next()
 }
 
 app.use(logRequest)
 
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.send("Express JS is running...")
 })
 
@@ -53,10 +54,11 @@ app.use('/api/courses', ReviewRouter)
 app.use('/api/quiz', quizRouter)
 app.use('/api/user', userUpdateRouter)
 app.use('/api/certificate', allCertificateRouter)
+app.use('/api/certificate', singleCertificateRouter)
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, ()=>{
+app.listen(PORT, () => {
     console.log("listening on port 5000")
 })
 
