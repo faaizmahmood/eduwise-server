@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 app.use(passport.initialize())
 
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://www.eduwiseapp.tech'],
+    origin: ['http://localhost:5173', 'https://www.eduwiseapp.tech', 'http://localhost:5174', 'https://certificate.eduwiseapp.tech'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }));

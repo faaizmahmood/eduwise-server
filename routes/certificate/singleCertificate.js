@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const Certificate = require('../../models/certificate');
 
@@ -8,7 +9,10 @@ router.get('/single-certificate/:certificateID', async (req, res) => {
 
     try {
         // Pass certificateID directly instead of wrapping it in an object
-        const certificate_response = await Certificate.findById(certificateID);
+
+        const objectId = new mongoose.Types.ObjectId(certificateID);
+
+        const certificate_response = await Certificate.findById(objectId);
 
         if (!certificate_response) {
             return res.status(404).json({ error: 'No Certificate found.' });
