@@ -17,6 +17,9 @@ router.post('/update-user', async (req, res) => {
     const user = await User.findById(user_id)
 
     switch (action) {
+
+        //enroll_course
+
         case "enroll_course":
             try {
                 // Enroll Course
@@ -39,6 +42,7 @@ router.post('/update-user', async (req, res) => {
                     return res.status(404).send({ error: "Course Not Exists" }); // 404 for course not found
                 }
 
+
                 // Enroll the user in the course
                 user.current_courses.push({
                     course_id: data.course_id,
@@ -49,15 +53,31 @@ router.post('/update-user', async (req, res) => {
 
                 const updatedUser = await user.save(); // Save the updated user object
 
+                const updatedCourse = await Course.findOneAndUpdate(
+                    { _id: courseObjectId },
+                    {
+                        $inc: { 'enrollment.current_enrolled': 1 }, // Increment current_enrolled by 1
+                        $addToSet: { 'enrollment.enrolled_students': user._id } // Add user ID if not already present
+                    },
+                    { new: true } // Return the updated course document
+                );
+
+                if (!updatedCourse) {
+                    return res.status(500).send({ error: "Failed to update course enrollment" });
+                }
+
                 return res.status(200).send({
-                    message: "User information updated successfully.",
-                    updatedUser: updatedUser
+                    message: "User enrolled successfully.",
+                    updatedUser: updatedUser,
+                    updatedCourse: updatedCourse
                 });
 
             } catch (error) {
                 console.log("erroe", error)
                 return res.status(500).json({ error: 'An error occurred while Updating Course!' });
             }
+
+        //save_course
 
         case "save_course":
 
@@ -88,6 +108,9 @@ router.post('/update-user', async (req, res) => {
                 return res.status(500).json({ error: 'An error occurred while Saving Course!' });
             }
 
+
+        //unsave_course
+
         case "unsave_course":
 
             try {
@@ -112,6 +135,8 @@ router.post('/update-user', async (req, res) => {
                 return res.status(500).json({ error: 'An error occurred while Saving Course!' });
             }
 
+
+        // update_preference
 
         case "update_preference":
 
