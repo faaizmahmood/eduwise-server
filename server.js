@@ -28,6 +28,7 @@ const userUpdateRouter = require('./routes/user/user')
 const allCertificateRouter = require('./routes/certificate/certificate')
 const singleCertificateRouter = require('./routes/certificate/singleCertificate')
 const settingRouter = require('./routes/setting/setting')
+const requestsRouter = require('./routes/InstructorRequests/requests')
 
 
 // Middlware
@@ -57,6 +58,7 @@ app.use('/api/user', userUpdateRouter)
 app.use('/api/certificate', allCertificateRouter)
 app.use('/api/certificate', singleCertificateRouter)
 app.use('/api/setting', settingRouter)
+app.use('/api/instructor-requests', requestsRouter)
 
 const PORT = process.env.PORT || 5000;
 
