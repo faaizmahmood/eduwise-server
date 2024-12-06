@@ -11,14 +11,14 @@ router.post('/requests', async (req, res) => {
         const existingInstructorById = await Instructor.findOne({ userId: instructorData.userId });
 
         if (existingInstructorById) {
-            return res.status(400).json({ message: 'Instructor with this user ID already exists.' });
+            return res.status(400).json({ message: 'User already Submitted.' });
         }
 
         // Check if an instructor with the same email already exists
         const existingInstructorByEmail = await Instructor.findOne({ email: instructorData.email });
 
         if (existingInstructorByEmail) {
-            return res.status(400).json({ message: 'Instructor with this email already exists.' });
+            return res.status(400).json({ message: 'Try Diffrent E-Mail.' });
         }
 
         // Create a new Instructor instance using the data from the request

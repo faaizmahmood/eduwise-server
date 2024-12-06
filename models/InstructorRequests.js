@@ -26,7 +26,7 @@ const InstructorSchema = new mongoose.Schema({
     },
     specialization: { type: String, required: true },
     teachingExperience: { type: String, required: true },
-    teachingMethodology: { type: String, required: true },
+    teachingMethdology: { type: String, required: true },
     termsAccepted: { type: Boolean, required: true },
     yearsOfExperience: { type: String, required: true },
 });
