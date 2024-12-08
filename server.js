@@ -29,6 +29,10 @@ const allCertificateRouter = require('./routes/certificate/certificate')
 const singleCertificateRouter = require('./routes/certificate/singleCertificate')
 const settingRouter = require('./routes/setting/setting')
 const requestsRouter = require('./routes/InstructorRequests/requests')
+const getRequestsRouter = require('./routes/InstructorRequests/getRequests')
+const getSingleRequestsRouter = require('./routes/InstructorRequests/getSingleRequest')
+const approveRejectRequestsRouter = require('./routes/InstructorRequests/approve-reject')
+const getSingleInstructorRouter = require('./routes/Instructor/getSingleInstructor')
 
 
 // Middlware
@@ -59,6 +63,10 @@ app.use('/api/certificate', allCertificateRouter)
 app.use('/api/certificate', singleCertificateRouter)
 app.use('/api/setting', settingRouter)
 app.use('/api/instructor-requests', requestsRouter)
+app.use('/api/instructor-requests', getRequestsRouter)
+app.use('/api/instructor-requests', getSingleRequestsRouter)
+app.use('/api/instructor-requests', approveRejectRequestsRouter)
+app.use('/api/instructor', getSingleInstructorRouter)
 
 const PORT = process.env.PORT || 5000;
 

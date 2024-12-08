@@ -4,15 +4,15 @@ require('dotenv').config()
 
 function getFormattedDate() {
     const months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
     ];
     const currentDate = new Date();
     const day = String(currentDate.getDate()).padStart(2, '0');
-    const month = months[currentDate.getMonth()]; 
-    const year = currentDate.getFullYear(); 
+    const month = months[currentDate.getMonth()];
+    const year = currentDate.getFullYear();
 
-    return `${day} ${month}, ${year}`; 
+    return `${day} ${month}, ${year}`;
 }
 
 const otp = async (email, name, otpCode) => {
@@ -176,7 +176,7 @@ const otp = async (email, name, otpCode) => {
         },
         to: email,
         subject: "Your OTP Verification Code",
-        html: htmlContent,  
+        html: htmlContent,
     });
 
 

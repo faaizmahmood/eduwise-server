@@ -32,7 +32,7 @@ const InstructorSchema = new mongoose.Schema({
 });
 
 
-const InstructorRequests = mongoose.model('instructorRequests', InstructorSchema)
+const Instructor = mongoose.model('instructors', InstructorSchema)
 
 
-module.exports = InstructorRequests;
+module.exports = Instructor;
