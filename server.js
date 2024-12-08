@@ -33,6 +33,7 @@ const getRequestsRouter = require('./routes/InstructorRequests/getRequests')
 const getSingleRequestsRouter = require('./routes/InstructorRequests/getSingleRequest')
 const approveRejectRequestsRouter = require('./routes/InstructorRequests/approve-reject')
 const getSingleInstructorRouter = require('./routes/Instructor/getSingleInstructor')
+const uploadCourseRouter = require('./routes/courses/uploadCourses/uploadCourse')
 
 
 // Middlware
@@ -67,6 +68,7 @@ app.use('/api/instructor-requests', getRequestsRouter)
 app.use('/api/instructor-requests', getSingleRequestsRouter)
 app.use('/api/instructor-requests', approveRejectRequestsRouter)
 app.use('/api/instructor', getSingleInstructorRouter)
+app.use('/api/course', uploadCourseRouter)
 
 const PORT = process.env.PORT || 5000;
 

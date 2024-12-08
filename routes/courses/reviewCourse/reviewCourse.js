@@ -22,9 +22,15 @@ router.put('/review-course/:courseID', async (req, res) => {
             return res.status(404).json({ error: 'Course not found.' });
         }
 
+        // Ensure the `reviews` array exists
+        if (!course.ratings || !Array.isArray(course.ratings.reviews)) {
+            course.ratings = course.ratings || {}; // Initialize `ratings` if missing
+            course.ratings.reviews = []; // Initialize `reviews` array
+        }
+
         // Check if the student has already reviewed the course
-        const existingReview = course.ratings.reviews.find(
-            (review) => review.student_id.toString() === student_id
+        const existingReview = course?.ratings?.reviews?.find(
+            (review) => review?.student_id.toString() === student_id
         );
 
         if (existingReview) {
