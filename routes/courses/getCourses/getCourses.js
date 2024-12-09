@@ -4,32 +4,32 @@ const Course = require('../../../models/courses')
 
 router.get('/getcourses', async (req, res) => {
 
-   try {
-    
-    const courses = await Course.find({}) 
+    try {
 
-    if (!courses) {
-        res.status(404).json({
-            error: "courses not found"
+        const courses = await Course.find({ status: { $ne: 'pending' } })
+
+        if (!courses) {
+            res.status(404).json({
+                error: "courses not found"
+            })
+
+            return
+        }
+
+        if (courses) {
+            res.status(200).json({
+                courses
+            })
+            return
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal server error"
         })
 
-        return
+        console.log(error)
     }
-
-    if (courses) {
-        res.status(200).json({
-            courses
-        })
-        return
-    }
-
-   } catch (error) {
-    res.status(500).json({
-        error: "Internal server error"
-    })
-
-    console.log(error)
-   }
 
 
 
