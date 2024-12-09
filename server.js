@@ -24,6 +24,7 @@ const getCoursesRouter = require('./routes/courses/getCourses/getCourses')
 const getSingleCoursesRouter = require('./routes/courses/singleCourse/singleCourse')
 const ReviewRouter = require('./routes/courses/reviewCourse/reviewCourse')
 const quizRouter = require('./routes/quiz/quiz')
+const addQuizRouter = require('./routes/quiz/addQuiz/addQuiz')
 const userUpdateRouter = require('./routes/user/user')
 const allCertificateRouter = require('./routes/certificate/certificate')
 const singleCertificateRouter = require('./routes/certificate/singleCertificate')
@@ -34,6 +35,7 @@ const getSingleRequestsRouter = require('./routes/InstructorRequests/getSingleRe
 const approveRejectRequestsRouter = require('./routes/InstructorRequests/approve-reject')
 const getSingleInstructorRouter = require('./routes/Instructor/getSingleInstructor')
 const uploadCourseRouter = require('./routes/courses/uploadCourses/uploadCourse')
+const draftsRouter = require('./routes/courses/drafts/drafts')
 
 
 // Middlware
@@ -59,6 +61,7 @@ app.use('/api/courses', getCoursesRouter)
 app.use('/api/courses', getSingleCoursesRouter)
 app.use('/api/courses', ReviewRouter)
 app.use('/api/quiz', quizRouter)
+app.use('/api/quiz', addQuizRouter)
 app.use('/api/user', userUpdateRouter)
 app.use('/api/certificate', allCertificateRouter)
 app.use('/api/certificate', singleCertificateRouter)
@@ -69,6 +72,7 @@ app.use('/api/instructor-requests', getSingleRequestsRouter)
 app.use('/api/instructor-requests', approveRejectRequestsRouter)
 app.use('/api/instructor', getSingleInstructorRouter)
 app.use('/api/course', uploadCourseRouter)
+app.use('/api/course', draftsRouter)
 
 const PORT = process.env.PORT || 5000;
 

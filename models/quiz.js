@@ -42,10 +42,6 @@ const QuestionSchema = new mongoose.Schema({
 
 // Define the quiz schema
 const QuizSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true,
-  },
   course_id: {
     type: String,
     required: true,

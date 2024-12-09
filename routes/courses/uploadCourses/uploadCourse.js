@@ -28,6 +28,7 @@ router.post('/upload-course', async (req, res) => {
             video,
             language,
             level,
+            status: 'pending',
             tags,
             duration,
             categories,

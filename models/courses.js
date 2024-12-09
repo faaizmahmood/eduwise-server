@@ -54,6 +54,7 @@ const courseSchema = new mongoose.Schema({
   thumbnail: { type: String, required: true }, // New field for thumbnail
   video: { type: String, required: true }, // New field for video
   categories: [{ type: String }],
+  status: { type: String },
   tags: [{ type: String }],
   language: { type: String, required: true },
   level: { type: String, required: true },
