@@ -12,6 +12,7 @@ const Instructors = require('../../models/Instructors'); // Approved instructors
 
 // POST endpoint to approve or reject an application
 router.post('/admin-handle-request', async (req, res) => {
+    
     const { requestID, userId, action } = req.body; // Expecting { requestID: '...', userId: '...', action: 'approve'/'reject' }
 
     const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);

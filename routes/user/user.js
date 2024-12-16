@@ -48,7 +48,8 @@ router.post('/update-user', async (req, res) => {
                     course_id: data.course_id,
                     progress_percentage: 0,
                     enrollment_date: new Date().toISOString(),
-                    title: data.title
+                    title: data.title,
+                    thumbnail: data.thumbnail
                 });
 
                 const updatedUser = await user.save(); // Save the updated user object

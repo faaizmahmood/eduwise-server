@@ -29,7 +29,9 @@ const InstructorSchema = new mongoose.Schema({
     teachingMethdology: { type: String, required: true },
     termsAccepted: { type: Boolean, required: true },
     yearsOfExperience: { type: String, required: true },
-});
+},
+    { timestamps: true }
+);
 
 
 const Instructor = mongoose.model('instructors', InstructorSchema)

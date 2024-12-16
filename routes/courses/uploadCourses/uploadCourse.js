@@ -16,7 +16,7 @@ router.post('/upload-course', async (req, res) => {
             level,
             tags,
             duration,
-            categories,
+            category,
             instructor,
         } = req.body;
 
@@ -31,7 +31,7 @@ router.post('/upload-course', async (req, res) => {
             status: 'pending',
             tags,
             duration,
-            categories,
+            category,
             instructor,
             enrollment: {
                 current_enrolled: 0,

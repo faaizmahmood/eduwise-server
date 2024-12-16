@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 app.use(passport.initialize())
 
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://www.eduwiseapp.tech', 'http://localhost:5174', 'https://certificate.eduwiseapp.tech'],
+    origin: ['http://localhost:5173', 'https://www.eduwiseapp.tech', 'http://localhost:5174', 'https://certificate.eduwiseapp.tech', 'https://app.eduwiseapp.tech'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }));
@@ -36,6 +36,13 @@ const approveRejectRequestsRouter = require('./routes/InstructorRequests/approve
 const getSingleInstructorRouter = require('./routes/Instructor/getSingleInstructor')
 const uploadCourseRouter = require('./routes/courses/uploadCourses/uploadCourse')
 const draftsRouter = require('./routes/courses/drafts/drafts')
+const instructorDashboardRouter = require('./routes/InstructorDashboard/InstructorDashboard')
+const adminDashboardRouter = require('./routes/adminDashboard/adminDashboard')
+const adminUsersRouter = require('./routes/adminUsers/adminUsers')
+const adminInstructorsRouter = require('./routes/adminInstructor/adminInstructor')
+const getInstructorProfileRouter = require('./routes/getSingleInstrcutor/getSingleInstrcutor')
+const suspendeAccountRouter = require('./routes/deleteuser/deleteUser')
+const getInstructorCoursesRouter = require('./routes/getInstructorCourses/getInstructorCourses')
 
 
 // Middlware
@@ -73,6 +80,13 @@ app.use('/api/instructor-requests', approveRejectRequestsRouter)
 app.use('/api/instructor', getSingleInstructorRouter)
 app.use('/api/course', uploadCourseRouter)
 app.use('/api/course', draftsRouter)
+app.use('/api/instructor', instructorDashboardRouter)
+app.use('/api/admin', adminDashboardRouter)
+app.use('/api/admin', adminUsersRouter)
+app.use('/api/admin', adminInstructorsRouter)
+app.use('/api/instructor', getInstructorProfileRouter)
+app.use('/api/delete', suspendeAccountRouter)
+app.use('/api/instructor', getInstructorCoursesRouter)
 
 const PORT = process.env.PORT || 5000;
 
